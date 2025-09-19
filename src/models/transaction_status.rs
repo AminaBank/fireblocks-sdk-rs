@@ -14,39 +14,26 @@ use {
 /// TransactionStatus : The primary status of the transaction.  For details, see [Primary transaction statuses](https://developers.fireblocks.com/reference/primary-transaction-statuses)
 /// The primary status of the transaction.  For details, see [Primary transaction statuses](https://developers.fireblocks.com/reference/primary-transaction-statuses)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum TransactionStatus {
-    #[serde(rename = "SUBMITTED")]
     Submitted,
-    #[serde(rename = "PENDING_AML_SCREENING")]
     PendingAmlScreening,
-    #[serde(rename = "PENDING_ENRICHMENT")]
     PendingEnrichment,
-    #[serde(rename = "PENDING_AUTHORIZATION")]
     PendingAuthorization,
-    #[serde(rename = "QUEUED")]
     Queued,
-    #[serde(rename = "PENDING_SIGNATURE")]
     PendingSignature,
-    #[serde(rename = "PENDING_3RD_PARTY_MANUAL_APPROVAL")]
     Pending3RdPartyManualApproval,
-    #[serde(rename = "PENDING_3RD_PARTY")]
     Pending3RdParty,
-    #[serde(rename = "BROADCASTING")]
     Broadcasting,
-    #[serde(rename = "COMPLETED")]
     Completed,
-    #[serde(rename = "CONFIRMING")]
     Confirming,
-    #[serde(rename = "CANCELLING")]
     Cancelling,
-    #[serde(rename = "CANCELLED")]
     Cancelled,
-    #[serde(rename = "BLOCKED")]
     Blocked,
-    #[serde(rename = "REJECTED")]
     Rejected,
-    #[serde(rename = "FAILED")]
     Failed,
+    #[serde(other)]
+    Unknown,
 }
 
 impl std::fmt::Display for TransactionStatus {
@@ -68,6 +55,7 @@ impl std::fmt::Display for TransactionStatus {
             Self::Blocked => write!(f, "BLOCKED"),
             Self::Rejected => write!(f, "REJECTED"),
             Self::Failed => write!(f, "FAILED"),
+            Self::Unknown => write!(f, "UNKNOWN"),
         }
     }
 }
